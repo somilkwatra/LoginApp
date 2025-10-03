@@ -1,12 +1,14 @@
 import React from 'react'
 import { Text, View } from 'react-native'
 
-function App() {
+function Posts() {
   return (
     <View>
-      <Text>Hi this is React Native application</Text>
+        <Text>
+            Posts
+        </Text>
     </View>
   )
 }
 
-export default App
+export default Posts
