@@ -7,11 +7,10 @@ import {
   StyleSheet,
 } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../../Navigator/AppNavigator';
-import {styles} from './styles';
-import { fetchPosts, Post } from '../../Api/api'; 
+import { styles } from './styles';
+import { fetchPosts, Post } from '../../Api/api';
 
-type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
+type Props = NativeStackScreenProps<any, 'Home'>;
 
 export default function Home({ navigation }: Props) {
   const [posts, setPosts] = useState<Post[]>([]);
@@ -34,18 +33,18 @@ export default function Home({ navigation }: Props) {
 
   return (
     <View style={styles.container}>
-      {/* List of Posts */}
       <FlatList
         data={posts}
         renderItem={renderItem}
         keyExtractor={(item) => item.id.toString()}
+        contentContainerStyle={{ paddingBottom: 50 }} // leave space for fixed footer
         style={styles.list}
-        ListFooterComponent={
-          <View style={styles.footer}>
-            <Text style={styles.footerText}>End of List</Text>
-          </View>
-        }
       />
+
+      {/* Fixed Footer */}
+      <View style={styles.footer}>
+        <Text style={styles.footerText}>End of List</Text>
+      </View>
     </View>
   );
 }

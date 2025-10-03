@@ -11,10 +11,9 @@ import {
   Platform,
 } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../../Navigator/AppNavigator'; // Adjust path as needed
 import styles from './styles';
 
-type Props = NativeStackScreenProps<RootStackParamList, 'Login'>;
+type Props = NativeStackScreenProps<any, 'Login'>;
 
 export default function Login({ navigation }: Props) {
   const [email, setEmail] = useState('');

@@ -8,11 +8,7 @@ import {
   SafeAreaView,
 } from 'react-native';
 import {styles} from './styles';
-/**
- * Simple Counter screen
- */
 const Counter = () => {
-  // State that holds the current count
   const [count, setCount] = useState(0);
 
   // Handlers

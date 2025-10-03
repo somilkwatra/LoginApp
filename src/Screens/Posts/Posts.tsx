@@ -6,14 +6,13 @@ import {
   StyleSheet,
 } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../../Navigator/AppNavigator';
 import {styles} from './styles';
 import { fetchPostById, Post } from '../../Api/api'; 
 
-type Props = NativeStackScreenProps<RootStackParamList, 'PostDetails'>;
+type Props = NativeStackScreenProps<any, 'PostDetails'>;
 
 export default function PostDetails({ route }: Props) {
-  const { postId } = route.params;
+  const { postId }:any = route.params;
   const [post, setPost] = useState<Post | null>(null);
   const [loading, setLoading] = useState(true);
 
