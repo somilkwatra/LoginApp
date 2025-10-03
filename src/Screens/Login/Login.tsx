@@ -24,8 +24,8 @@ export default function Login({ navigation }: Props) {
     if (!email || !password) {
       Alert.alert('Error', 'Please enter both email and password');
     } else {
-      Alert.alert('Login Details', `Email: ${email}\nPassword: ${password}`); // Show both email and password
-      navigation.replace('Posts');
+      Alert.alert('Login Details', `Email: ${email}\nPassword: ${password}`);
+      navigation.replace('Home');
     }
   };
 

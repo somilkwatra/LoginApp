@@ -1,14 +1,14 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
-import { Platform } from 'react-native';
+import { Platform, TouchableOpacity, Text } from 'react-native';
 import Login from '../Screens/Login/Login';
+import Home from '../Screens/Home/Home';
 import PostDetails from '../Screens/Posts/Posts';
-import AllPosts from '../Screens/AllPosts/AllPosts';
 
 export type RootStackParamList = {
   Login: undefined;
-  Posts: undefined;
+  Home: undefined;
   PostDetails: { postId: number };
 };
 
@@ -22,6 +22,9 @@ export default function AppNavigator() {
         screenOptions={{
           animation: 'default',
           ...(Platform.OS === 'ios' ? { animationTypeForReplace: 'pop' } : {}),
+          headerStyle: { backgroundColor: '#5a9ef7ff' },
+          headerTintColor: '#ffffffff',
+          headerTitleStyle: { fontWeight: 'bold' },
         }}
       >
         <Screen
@@ -30,9 +33,19 @@ export default function AppNavigator() {
           options={{ title: 'Login', headerShown: false }}
         />
         <Screen
-          name="Posts"
-          component={AllPosts}
-          options={{ title: 'All Posts' }}
+          name="Home"
+          component={Home}
+          options={({ navigation }) => ({
+            title: 'Home',
+            headerRight: () => (
+              <TouchableOpacity
+                onPress={() => navigation.replace('Login')}
+                style={{ marginRight: 10 }}
+              >
+                <Text style={{ color: '#ffffffff', fontSize: 16 }}>Logout</Text>
+              </TouchableOpacity>
+            ),
+          })}
         />
         <Screen
           name="PostDetails"
