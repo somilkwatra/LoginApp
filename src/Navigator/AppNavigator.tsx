@@ -40,7 +40,7 @@ function HomeStackNavigator() {
       <HomeStack.Screen
         name="PostDetails"
         component={PostDetails}
-        options={{ title: 'Post Details' }}
+        options={{ title: 'Post Details',headerShown: false }}
       />
     </HomeStack.Navigator>
   );
