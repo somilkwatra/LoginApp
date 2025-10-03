@@ -1,34 +1,38 @@
 import React, { useState } from 'react';
-import { 
-  View, 
-  Text, 
-  TextInput, 
-  Button, 
-  Alert, 
-  StyleSheet, 
-  KeyboardAvoidingView, 
-  TouchableWithoutFeedback, 
+import {
+  View,
+  Text,
+  TextInput,
+  Button,
+  Alert,
+  KeyboardAvoidingView,
+  TouchableWithoutFeedback,
   Keyboard,
-  Platform
+  Platform,
 } from 'react-native';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../../Navigator/AppNavigator'; // Adjust path as needed
 import styles from './styles';
 
-export default function Login() {
+type Props = NativeStackScreenProps<RootStackParamList, 'Login'>;
+
+export default function Login({ navigation }: Props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleLogin = () => {
     if (!email || !password) {
-      Alert.alert("Error", "Please enter both email and password");
+      Alert.alert('Error', 'Please enter both email and password');
     } else {
-      Alert.alert("Login Info", `Email: ${email}\nPassword: ${password}`);
+      Alert.alert('Login Details', `Email: ${email}\nPassword: ${password}`); // Show both email and password
+      navigation.replace('Posts');
     }
   };
 
   return (
-    <KeyboardAvoidingView 
-      style={{ flex: 1 }} 
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
+    <KeyboardAvoidingView
+      style={{ flex: 1 }}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
@@ -58,4 +62,3 @@ export default function Login() {
     </KeyboardAvoidingView>
   );
 }
-

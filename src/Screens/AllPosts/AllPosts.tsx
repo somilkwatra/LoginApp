@@ -1,14 +1,18 @@
-import React from 'react'
-import { Text, View } from 'react-native'
+import React from 'react';
+import { View, Text, Button } from 'react-native';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../../Navigator/AppNavigator'; // Adjust path
 
-function AllPosts() {
+type Props = NativeStackScreenProps<RootStackParamList, 'Posts'>;
+
+export default function AllPosts({ navigation }: Props) {
   return (
-    <View>
-        <Text>
-            All Posts
-        </Text>
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>All Posts Screen</Text>
+      <Button
+        title="Go to Post Details"
+        onPress={() => navigation.navigate('PostDetails', { postId: 1 })}
+      />
     </View>
-  )
+  );
 }
-
-export default AllPosts

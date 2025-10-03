@@ -1,10 +1,15 @@
-import React from 'react'
-import Login from './Screens/Login/Login'
+import React from 'react';
+import { View } from 'react-native';
+import { enableScreens } from 'react-native-screens'; // Enable screens
+import AppNavigator from './Navigator/AppNavigator';
 
-function App() {
+// Enable screens before rendering
+enableScreens();
+
+export default function App() {
   return (
-    <Login/>
-  )
+    <View style={{ flex: 1 }}>
+      <AppNavigator />
+    </View>
+  );
 }
-
-export default App

@@ -1,14 +1,15 @@
-import React from 'react'
-import { Text, View } from 'react-native'
+import React from 'react';
+import { View, Text } from 'react-native';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../../Navigator/AppNavigator'; // Adjust path
 
-function Posts() {
+type Props = NativeStackScreenProps<RootStackParamList, 'PostDetails'>;
+
+export default function PostDetails({ route }: Props) {
+  const { postId } = route.params;
   return (
-    <View>
-        <Text>
-            Posts
-        </Text>
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Post Details Screen for Post ID: {postId}</Text>
     </View>
-  )
+  );
 }
-
-export default Posts
