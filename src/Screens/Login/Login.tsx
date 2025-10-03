@@ -13,7 +13,14 @@ import {
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import styles from './styles';
 
-type Props = NativeStackScreenProps<any, 'Login'>;
+type RootStackParamList = {
+  Login: undefined;
+  MainTabs: { screen?: string }; // Updated to support nested navigation
+  Home: undefined; // Not directly used, but included for type safety
+  PostDetails: { postId: number };
+};
+
+type Props = NativeStackScreenProps<RootStackParamList, 'Login'>;
 
 export default function Login({ navigation }: Props) {
   const [email, setEmail] = useState('');
@@ -24,7 +31,10 @@ export default function Login({ navigation }: Props) {
       Alert.alert('Error', 'Please enter both email and password');
     } else {
       Alert.alert('Login Details', `Email: ${email}\nPassword: ${password}`);
-      navigation.replace('Home');
+      // Navigate to the Home screen inside HomeStack within MainTabs
+      navigation.replace('MainTabs', {
+        screen: 'HomeStack',
+      });
     }
   };
 
