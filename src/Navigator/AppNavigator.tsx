@@ -1,58 +1,71 @@
 import React from 'react';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
-import { Platform, TouchableOpacity, Text } from 'react-native';
-import Login from '../Screens/Login/Login';
 import Home from '../Screens/Home/Home';
+import Counter from '..//Screens/Counter/Couner';
 import PostDetails from '../Screens/Posts/Posts';
 
-export type RootStackParamList = {
-  Login: undefined;
+type RootStackParamList = {
   Home: undefined;
   PostDetails: { postId: number };
 };
 
-const { Navigator, Screen } = createNativeStackNavigator<RootStackParamList>();
+const Tab = createBottomTabNavigator();
+const {Navigator,Screen} = createNativeStackNavigator<RootStackParamList>();
 
+// Stack Navigator for Home + PostDetails
+function HomeStack() {
+  return (
+    <Navigator
+      screenOptions={{
+        headerStyle: { backgroundColor: '#5a9ef7' },
+        headerTintColor: '#fff',
+        headerTitleStyle: { fontWeight: 'bold' },
+      }}
+    >
+      <Screen
+        name="Home"
+        component={Home} // your existing Home component
+        options={{ title: 'Home' }}
+      />
+      <Screen
+        name="PostDetails"
+        component={PostDetails}
+        options={{ title: 'Post Details' }}
+      />
+    </Navigator>
+  );
+}
+
+// Tab Navigator
 export default function AppNavigator() {
   return (
     <NavigationContainer>
-      <Navigator
-        initialRouteName="Login"
+      <Tab.Navigator
+        initialRouteName="HomeStack"
         screenOptions={{
-          animation: 'default',
-          ...(Platform.OS === 'ios' ? { animationTypeForReplace: 'pop' } : {}),
-          headerStyle: { backgroundColor: '#5a9ef7ff' },
-          headerTintColor: '#ffffffff',
-          headerTitleStyle: { fontWeight: 'bold' },
+          tabBarActiveTintColor: '#5a9ef7',
+          tabBarInactiveTintColor: 'gray',
+          tabBarStyle: {
+            backgroundColor: '#ffffff',
+            borderTopColor: '#5a9ef7',
+            borderTopWidth: 1,
+          },
+          headerShown: false,
         }}
       >
-        <Screen
-          name="Login"
-          component={Login}
-          options={{ title: 'Login', headerShown: false }}
+        <Tab.Screen
+          name="HomeStack"
+          component={HomeStack}
+          options={{ title: 'Home' }}
         />
-        <Screen
-          name="Home"
-          component={Home}
-          options={({ navigation }) => ({
-            title: 'Home',
-            headerRight: () => (
-              <TouchableOpacity
-                onPress={() => navigation.replace('Login')}
-                style={{ marginRight: 10 }}
-              >
-                <Text style={{ color: '#ffffffff', fontSize: 16 }}>Logout</Text>
-              </TouchableOpacity>
-            ),
-          })}
+        <Tab.Screen
+          name="Counter"
+          component={Counter}
+          options={{ title: 'Counter' }}
         />
-        <Screen
-          name="PostDetails"
-          component={PostDetails}
-          options={{ title: 'Post Details' }}
-        />
-      </Navigator>
+      </Tab.Navigator>
     </NavigationContainer>
   );
 }
